@@ -17,6 +17,23 @@ html, body{
     text-align: center;
 }
 
+.mybutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+    margin: auto auto auto auto;
+}
+
+.mybutton:hover{
+    cursor: pointer;
+}
+
+
 .indicators{
     position: relative;
     display: flex;
@@ -163,21 +180,6 @@ html, body{
     margin: 20px auto auto auto;
 }
 
-.mybutton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    height: 50px;
-    background-color: rgb(123, 142, 202);
-    color: aliceblue;
-    font-size: 20px;
-    margin: auto auto auto auto;
-}
-
-.mybutton:hover{
-    cursor: pointer;
-}
 
 .win{
     position: absolute;
