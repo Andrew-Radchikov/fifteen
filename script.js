@@ -2,10 +2,18 @@ const field=document.querySelector(".field");
 const size=document.querySelector(".size");
 const sizeOptions=document.querySelector(".sizeOptions");
 const sizeChoice=document.querySelectorAll(".sizeChoice");
+const greyFon=document.querySelector(".greyFon");
 const newGame=document.querySelector(".newGame");
 const numberOfSteps=document.querySelector(".steps");
 const time=document.querySelector(".clock");
 const win=document.querySelector(".win");
+const finalSteps=document.querySelector(".finalSteps");
+const finalTime=document.querySelector(".finalTime");
+const audio=document.querySelectorAll("audio")[0];
+const sounds=document.querySelectorAll("audio")[1];
+const musicButton=document.querySelector(".music");
+const soundsButton=document.querySelector(".sounds");
+
 
 
 let x0, y0;
@@ -15,11 +23,14 @@ let n;
 let fieldNotActive=0;
 let steps;
 let timer;
+let musicPlay=0;
+let soundsPlay;
 
 
 //Local Storage 
 function setLocalStorage() {
     localStorage.setItem('size', n);
+    localStorage.setItem('sounds', soundsPlay);
    
 }
 
@@ -58,8 +69,25 @@ function getLocalStorage() {
 
     displayKnuckles(sampleArray[n-3]);
     fieldNotActive =1;
+
+    musicButton.classList.add("notMusic");
+
+    if(localStorage.getItem('sounds')) {
+        soundsPlay = Number(localStorage.getItem('sounds'));     
+        }
+    else{
+        soundsPlay =1;
+    }
+  
+
+    if(soundsPlay == 0){
+        soundsButton.classList.add("notMusic");
+    }
       
 }
+
+
+
 
 window.addEventListener('load', getLocalStorage);
 window.addEventListener('beforeunload', setLocalStorage);
@@ -182,35 +210,56 @@ function deleteGame(){
 field.addEventListener("click",(event)=>{
   
     if(event.target.classList.contains("insideBlock") && fieldNotActive == 0){
-        console.log("active game");
+        
+        
         let x = userShift(game,event.target.textContent);
         let dist= 100 / game.length;
 
         switch(x) {
             case "down":{
+                steps+=1;
+                if(soundsPlay == 1){
+                    sounds.play();
+                }
                 event.target.parentNode.style.top=Number(event.target.parentNode.style.top.slice(0, event.target.parentNode.style.top.length - 1)) + dist + "%";
                 break;
             }
             case "up":{
+                steps+=1;
+                if(soundsPlay == 1){
+                    sounds.play();
+                }
                 event.target.parentNode.style.top=Number(event.target.parentNode.style.top.slice(0, event.target.parentNode.style.top.length - 1))-dist + "%";
                 break;
             }
             case "left":{
+                steps+=1;
+                if(soundsPlay == 1){
+                    sounds.play();
+                }
                 event.target.parentNode.style.left=Number(event.target.parentNode.style.left.slice(0, event.target.parentNode.style.left.length - 1))-dist + "%";
                 break;
             }
             case "right":{
+                steps+=1;
+                if(soundsPlay == 1){
+                    sounds.play();
+                }
                 event.target.parentNode.style.left=Number(event.target.parentNode.style.left.slice(0 ,event.target.parentNode.style.left.length - 1)) + dist + "%";
                 break;
             }
         }
-    steps+=1;
+    
+    if(steps == 1000){
+        steps = 999;
+    }
     numberOfSteps.innerHTML=`Steps: ${steps}`;
 
         if(isWin(game, sampleArray[n-3])){
             fieldNotActive=1;
             win.style.display="flex";
-            win.innerHTML=`Congratulation!!! <br> You are win!!! <br>  Steps:${steps} <br>  Time=${time.textContent}`;
+            finalSteps.innerHTML=`${steps}`;
+            finalTime.innerHTML=`${time.textContent}`;
             clearInterval(timer);    
            
 
@@ -256,6 +305,8 @@ function userShift(arr, textValue){
           return "right";
         }
     }
+
+    return false;
 }
 
 function isWin(arr, standart){
@@ -276,11 +327,11 @@ function isWin(arr, standart){
 size.addEventListener("click", ()=>{
     size.classList.add("hide");
     sizeOptions.classList.add("show");
+    greyFon.style.display="block";
    for(let i=0; i<sizeChoice.length; i++){
     sizeChoice[i].style.color= "aliceblue";
    }
    sizeChoice[n-3].style.color= "green";
-   fieldNotActive=1;
 })
 
 
@@ -304,6 +355,8 @@ sizeOptions.addEventListener("click", (event)=>{
             n=7; break;
         }
     }
+
+    greyFon.style.display="none";
     size.classList.remove("hide");
     sizeOptions.classList.remove("show");
     deleteGame();
@@ -317,8 +370,14 @@ sizeOptions.addEventListener("click", (event)=>{
     
 })
 
+greyFon.addEventListener("click",()=>{
+    greyFon.style.display="none";
+    size.classList.remove("hide");
+    sizeOptions.classList.remove("show");
+})
 
 
+// Create new game ant time
 
 newGame.addEventListener("click",()=>{
     clearInterval(timer);    
@@ -329,37 +388,72 @@ newGame.addEventListener("click",()=>{
     steps=0;
     numberOfSteps.innerHTML=`Steps: ${steps}`;
     fieldNotActive=0;
-    var seconds = 0;
-    var secundes=0;
+    var allTime = 0;
+    var seconds=0;
     var minutes=0;
 
     timer= setInterval(function() {
        
        
-             seconds ++;
-             minutes=seconds - seconds % 60;
-             secundes=seconds - 60*minutes;
+             allTime ++;
+             minutes=(allTime - allTime % 60)/60;
+             seconds=allTime - 60*minutes;
              
-             if(secundes<10){
-                 secundes="0"+secundes;
+             if(seconds<10){
+                 seconds="0"+seconds;
              }
              if(minutes<10){
                  minutes="0"+minutes;
              }
-             
+             if(allTime == 3600){
+                allTime = 3599;
+             }
  
-             time.innerHTML = `${minutes}:${secundes}`;
+             time.innerHTML = `${minutes}:${seconds}`;
 
             }, 1000)
 
 
 })
 
-win.addEventListener("click",()=>{
-    win.style.display="none";
-    time.innerHTML ="Time";
-    steps=0;
-    numberOfSteps.innerHTML=`Steps`;
+// Win 
+
+win.addEventListener("click",(event)=>{
+    if(event.target.classList.contains("win")){
+        win.style.display="none";
+        time.innerHTML ="Time";
+        steps=0;
+        numberOfSteps.innerHTML=`Steps`;
+    }
+    else{
+        
+    }
+    
 })
 
 
+musicButton.addEventListener("click", ()=>{
+    musicButton.classList.toggle("notMusic")
+    if(musicPlay == 1){
+        musicPlay = 0;
+        audio.pause();
+    }
+    else{
+        audio.play();
+        musicPlay = 1;
+    }
+})
+
+
+soundsButton.addEventListener("click", ()=>{
+    soundsButton.classList.toggle("notMusic")
+    if(soundsPlay == 1){
+        soundsPlay = 0;
+    }
+    else{
+        soundsPlay = 1;
+    }
+})
+
+
+ 

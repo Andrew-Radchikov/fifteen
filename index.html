@@ -11,7 +11,12 @@
 <body>
     <div class="game">
     <div class="gameName">Fifteen</div>
-    <div class="settings"></div>
+    <div class="settings">
+        <div class="music mybutton">Music</div>
+        <div class="sounds mybutton">Sounds</div>
+        <div class="results mybutton">Statistics</div>
+
+    </div>
     <div class="indicators">
         <div class="forSize">
         <div class="size">Very Easy (3x3)</div>
@@ -29,12 +34,37 @@
     <div class="field">
         
 
+
+
     </div>
     <div class="newGame">New game</div>
 </div>
 
-<div class="win">Congratulations</div>
 
+<div class="win">
+    <div class="congratulations">
+        <div class="text">Congratulations</div>
+        <div class="text">You are win!!!</div>
+        <div class="winResults">
+            <div class="textResults">Steps: </div>
+            <div class="finalSteps"></div>
+
+        </div>
+        <div class="winResults">
+            <div class="textResults">Time:</div>
+            <div class="finalTime"></div>
+
+        </div>
+        <div class="text">Enter your name:</div>
+        <input class="userName">
+        <div class=" mybutton sendForm">Отправить</div>
+        
+    </div>
+</div>
+
+<div class="greyFon"></div>
+<audio src="./music.mp3" autoplay="autoplay"></audio>
+<audio src="./effect1.mp3"></audio>
     <script src="./script.js"></script>
 </body>
 </html>
