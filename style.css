@@ -1,0 +1,390 @@
+
+html, body{
+    margin: 0;
+    padding: 0;
+}
+
+.game{
+    max-width: 600px;
+    margin: auto;
+    user-select: none;
+}
+
+.gameName{
+    width: 100%;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.mybutton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+    margin: auto auto auto auto;
+}
+
+.mybutton:hover{
+    cursor: pointer;
+}
+
+
+.indicators{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 70px;
+}
+
+.settings{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 70px;
+}
+
+.field{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    padding-bottom: 100%;
+    background-color: aquamarine;
+    border-radius: 10px;
+}
+
+.block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background-color: aquamarine;
+    transition: 0.5s;
+    border-radius: 10px;
+    font-size: 48px;
+}
+
+.insideBlock{
+    width: 94%;
+    height: 94%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(116, 116, 201);
+    border-radius: 10px;
+    font-size: 48px;
+    color:aliceblue;
+}
+
+.size{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+}
+
+.size:hover{
+    cursor: pointer;
+}
+
+.sizeOptions{
+    position: absolute;
+    z-index: 10;
+    top:15%;
+    left:4.2%;
+    display: none;
+   flex-direction: column;
+   height: 300px;
+}
+
+.sizeChoice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+   
+}
+
+.notMusic{
+    text-decoration:line-through
+}
+
+.show{
+    display: flex;
+
+}
+
+.hide{
+    display: none;
+}
+
+.forSize{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    color: aliceblue;
+    font-size: 20px;
+}
+
+.steps{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+}
+
+.clock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+}
+
+.newGame{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    background-color: rgb(123, 142, 202);
+    color: aliceblue;
+    font-size: 20px;
+    margin: 20px auto auto auto;
+}
+
+
+.win{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(16, 16, 17, 0.5);
+    display: none;
+  
+    align-items: center;
+    justify-content: center;
+}
+
+.congratulations{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    background-color:  aquamarine;;
+    font-size: 30px;
+    padding: 20px;
+    color: black;
+}
+
+
+.resultsDiv{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(16, 16, 17, 0.5);
+     display: none;
+  
+    align-items: center;
+    justify-content: center;
+}
+
+.statistics{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    background-color: aliceblue;
+    font-size: 30px;
+    color: black;
+}
+
+.textStat{
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.typeOfResults{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 600px;
+    height: 54px;
+}
+
+.nsn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    height: 50px;
+    font-size: 24px;
+    background-color: rgb(123, 142, 202);
+    border: 2px solid;
+     
+}
+
+
+.checkNSN{
+    border-bottom: none;
+    background-color:  aquamarine;
+}
+
+.top10{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 486.5px;
+    top:113.5px;
+    background-color: aquamarine;
+}
+
+
+.showTop10{
+    z-index: 10;
+}
+
+.userResult{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 5px auto 5px auto;
+    height: 30px;
+    width: 90%;
+   font-size: 24px;
+}
+
+
+.userNick{
+    width: 350px;
+    overflow: hidden;
+}
+
+.userTime{
+    width: 70px;
+    margin-left: 50px;
+}
+
+.userSteps{
+    width: 70px;
+    margin-left: 0;
+    text-align: center;
+}
+
+.text{
+    font-size: 36px;
+}
+
+.winResults{
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.textResults{
+    font-size: 36px;
+    width: 100px;
+    margin-left: 0px;
+}
+
+.userName{
+    width: 280px;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.greyFon{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(16, 16, 17, 0.5);
+    display: none;
+}
+
+
+@media (max-width: 460px){
+
+    .mybutton{
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .clock{
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .steps{
+        width: 100px;
+        font-size: 12px;
+    }
+    .insideBlock{
+        font-size: 24px;
+    }
+    
+    .size{
+        width: 100px;
+        font-size: 12px;
+    }
+    
+    .sizeChoice{
+        width: 100px;
+        font-size: 12px;
+    }
+
+    .forSize{
+        width: 100px;
+        font-size: 12px;
+    }
+
+}
