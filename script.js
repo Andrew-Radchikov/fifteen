@@ -13,6 +13,11 @@ const audio=document.querySelectorAll("audio")[0];
 const sounds=document.querySelectorAll("audio")[1];
 const musicButton=document.querySelector(".music");
 const soundsButton=document.querySelector(".sounds");
+const results=document.querySelector(".results");
+const resultsDiv=document.querySelector(".resultsDiv");
+const resultsFon=document.querySelector(".statistics");
+const sendform=document.querySelector(".sendForm");
+const username=document.getElementById("user");
 
 
 
@@ -80,9 +85,9 @@ function getLocalStorage() {
     }
   
 
-    if(soundsPlay == 0){
-        soundsButton.classList.add("notMusic");
-    }
+     if(soundsPlay == 0){
+         soundsButton.classList.add("notMusic");
+     }
       
 }
 
@@ -258,14 +263,17 @@ field.addEventListener("click",(event)=>{
         if(isWin(game, sampleArray[n-3])){
             fieldNotActive=1;
             win.style.display="flex";
+     
             finalSteps.innerHTML=`${steps}`;
             finalTime.innerHTML=`${time.textContent}`;
             clearInterval(timer);    
+           
            
 
         }
     }
 })
+
 
 
 function userShift(arr, textValue){
@@ -424,12 +432,16 @@ win.addEventListener("click",(event)=>{
         time.innerHTML ="Time";
         steps=0;
         numberOfSteps.innerHTML=`Steps`;
+        
+        
     }
     else{
         
     }
     
 })
+
+
 
 
 musicButton.addEventListener("click", ()=>{
@@ -456,4 +468,220 @@ soundsButton.addEventListener("click", ()=>{
 })
 
 
- 
+
+const statisticButtons=document.querySelectorAll(".nsn");
+const statisticDiv=document.querySelectorAll(".top10");
+
+
+
+
+function showNResults(n){
+   
+    for(let i =0; i<5; i++){
+        statisticDiv[i].classList.remove('showTop10');
+        statisticButtons[i].classList.remove("checkNSN");
+    }
+    statisticDiv[n].classList.add("showTop10");
+    statisticButtons[n].classList.add("checkNSN");
+}
+
+
+statisticButtons[0].addEventListener("click",()=>{
+    showNResults(0);
+})
+statisticButtons[1].addEventListener("click",()=>{
+    showNResults(1);
+})
+
+statisticButtons[2].addEventListener("click",()=>{
+    showNResults(2);
+})
+
+statisticButtons[3].addEventListener("click",()=>{
+    showNResults(3);
+})
+statisticButtons[4].addEventListener("click",()=>{
+    showNResults(4);
+})
+
+
+
+
+
+
+
+
+sendform.addEventListener('click',()=>{
+    
+    let data = new FormData();
+    data.append("name", username.value);
+
+    var tim=  time.textContent.split(":");
+    var timeToSec=Number(tim[0])*60+Number(tim[1]);
+    data.append("time", timeToSec); 
+    data.append("steps", steps); 
+    data.append("n", n); 
+    fetch(`https://script.google.com/macros/s/AKfycbxypQPu6h5bXw54JqmHke8EMme-I7G4sFQMCJflQeye-IOPEBRr614_3vWQn-obHQYp/exec`, { method: "POST", mode: 'no-cors', body: data })
+    win.style.display="none";
+    time.innerHTML ="Time";
+    steps=0;
+    numberOfSteps.innerHTML=`Steps`;
+    username.value="";
+    setTimeout(getResults(), 5000);
+})
+
+
+results.addEventListener("click",()=>{
+    resultsDiv.style.display="flex";
+})
+
+resultsDiv.addEventListener("click",(event)=>{
+    getResults()
+    if(event.target.classList.contains("resultsDiv")){
+        resultsDiv.style.display="none";
+    }
+    else{
+        
+    }
+  
+})
+
+getResults();
+
+
+function getResults(){
+
+    fetch('https://script.google.com/macros/s/AKfycbyjGq_o7VRFQ2HGhEpBv4CGdOZgfhVJhflQr-yZYssi2dnAaK7m8gNoH1JAKbsJE339/exec?n=3')
+    .then( response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then( function (json){
+        
+         paintResults(json,0)})
+    .catch( err => console.error(`Fetch problem: ${err.message}`) );
+
+
+    fetch('https://script.google.com/macros/s/AKfycbyjGq_o7VRFQ2HGhEpBv4CGdOZgfhVJhflQr-yZYssi2dnAaK7m8gNoH1JAKbsJE339/exec?n=4')
+    .then( response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then( function (json){
+        paintResults(json,1)})
+    .catch( err => console.error(`Fetch problem: ${err.message}`) );
+
+
+    fetch('https://script.google.com/macros/s/AKfycbyjGq_o7VRFQ2HGhEpBv4CGdOZgfhVJhflQr-yZYssi2dnAaK7m8gNoH1JAKbsJE339/exec?n=5')
+    .then( response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then( function (json){
+        paintResults(json,2)})
+    .catch( err => console.error(`Fetch problem: ${err.message}`) );
+
+
+    fetch('https://script.google.com/macros/s/AKfycbyjGq_o7VRFQ2HGhEpBv4CGdOZgfhVJhflQr-yZYssi2dnAaK7m8gNoH1JAKbsJE339/exec?n=6')
+    .then( response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then( function (json){
+        paintResults(json,3)})
+    .catch( err => console.error(`Fetch problem: ${err.message}`) );
+
+
+    fetch('https://script.google.com/macros/s/AKfycbyjGq_o7VRFQ2HGhEpBv4CGdOZgfhVJhflQr-yZYssi2dnAaK7m8gNoH1JAKbsJE339/exec?n=7')
+    .then( response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then( function (json){
+        paintResults(json,4)})
+    .catch( err => console.error(`Fetch problem: ${err.message}`) );
+
+
+//   Все запісі надо делать в этіх функціях 
+    
+
+
+
+}
+
+
+function paintResults(array, n){
+
+
+while (statisticDiv[n].firstChild) {
+   statisticDiv[n].removeChild(statisticDiv[n].firstChild);
+}
+
+
+array.sort(function(a,b){
+    return a[2]-b[2]
+});
+
+
+var userelem=document.createElement("div");
+    userelem.classList.add("userResult");
+    var userNick=document.createElement("div");
+    userNick.classList.add("userNick");
+    userNick.innerHTML=`Name`;
+    userelem.appendChild(userNick);
+    var userTime=document.createElement("div");
+    userTime.classList.add("userTime");
+    userTime.innerHTML=`Time`;
+    userelem.appendChild(userTime);
+    var userSteps=document.createElement("div");
+    userSteps.classList.add("userSteps");
+    userSteps.innerHTML=`Steps`;
+    userelem.appendChild(userSteps);
+    statisticDiv[n].appendChild(userelem);
+
+
+
+
+for(let i=0; i<10; i++){
+    var userelem=document.createElement("div");
+    userelem.classList.add("userResult");
+    var userNick=document.createElement("div");
+    userNick.classList.add("userNick");
+    userNick.innerHTML=`${i+1}. ${array[i][0]}`;
+    userelem.appendChild(userNick);
+    var userTime=document.createElement("div");
+    userTime.classList.add("userTime");
+    
+    var userMinutes=(array[i][1] - array[i][1] % 60)/60;
+    var userSeconds=array[i][1] - 60*userMinutes;
+    
+    if(userSeconds<10){
+        userSeconds="0"+userSeconds;
+    }
+    if(userMinutes<10){
+        userMinutes="0"+userMinutes;
+    }
+      
+    userTime.innerHTML=`${userMinutes}:${userSeconds}`;
+    userelem.appendChild(userTime);
+    var userSteps=document.createElement("div");
+    userSteps.classList.add("userSteps");
+    userSteps.innerHTML=array[i][2];
+    userelem.appendChild(userSteps);
+        statisticDiv[n].appendChild(userelem);
+
+}
+
+
+}
+
