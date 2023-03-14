@@ -211,6 +211,111 @@ html, body{
     color: black;
 }
 
+
+.resultsDiv{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(16, 16, 17, 0.5);
+     display: none;
+  
+    align-items: center;
+    justify-content: center;
+}
+
+.statistics{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    background-color: aliceblue;
+    font-size: 30px;
+    color: black;
+}
+
+.textStat{
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    font-size: 36px;
+    text-align: center;
+}
+
+.typeOfResults{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 600px;
+    height: 54px;
+}
+
+.nsn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    height: 50px;
+    font-size: 24px;
+    background-color: rgb(123, 142, 202);
+    border: 2px solid;
+     
+}
+
+
+.checkNSN{
+    border-bottom: none;
+    background-color:  aquamarine;
+}
+
+.top10{
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 486.5px;
+    top:113.5px;
+    background-color: aquamarine;
+}
+
+
+.showTop10{
+    z-index: 10;
+}
+
+.userResult{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 5px auto 5px auto;
+    height: 30px;
+    width: 90%;
+   font-size: 24px;
+}
+
+
+.userNick{
+    width: 350px;
+    overflow: hidden;
+}
+
+.userTime{
+    width: 70px;
+    margin-left: 50px;
+}
+
+.userSteps{
+    width: 70px;
+    margin-left: 0;
+    text-align: center;
+}
+
 .text{
     font-size: 36px;
 }
